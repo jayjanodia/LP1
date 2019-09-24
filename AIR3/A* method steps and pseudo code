@@ -1,0 +1,57 @@
+Add the starting square(or node) to the open list
+
+Repeat the following:
+	A: Look for the lowest F cost square on the open list. This is the current square
+	
+	B: Switch it to the closed list
+	
+	C: For each of the 8 adjacent squares to the current square:
+		
+		If it is not walkable or is in the closed list then ignore it.
+		
+		Else:
+			
+			If it is not in the open list, add it to the open list. Make the current square the parent of this square. Record F,G,H costs of the square
+			
+			If it is in the open list already, check to see if this path to that square is better, using G cost as the measure. A lower G cost means that it is the better path. If so, change the parent of the square to the current square, and recalculate the G and F scores of the square. If you are keeping your open list sorted by F score, you need to resort the list to account for the change
+			
+	D: Stop when you:
+		
+		Add the target to the closed list, in which case the path has been found
+		
+		Failed to find the target square, and the open list is empty, in which case there is no path
+		
+Save the path. Working backwards from the target square, go from each square to its parent square until you reach the starting square. That is your path.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
