@@ -52,5 +52,65 @@ int main() {
 
 //Threads can be synchronized using OpenMP. Available commands are:
 //critical: one thread executed at a time, unlike simultaneous execution of multiple threads. Protects against race
-//atomic: 
+//atomic: Memory update (write or read-modify-write) in the next instruction will be performed atomically. Compiler gives better performance than critical
+//ordered: Structured block is executed in the order in which iterations would be executed in a sequential loop
+//barrier: Each thread waits until all the other threads in the team reach that point
+//nowait: Threads complete work without waiting for the other team threads to finish
+
+//EXAMPLE OF BARRIER:
+/*#include<iostream>
+#include<omp.h>
+using namespace std;
+
+int main() {
+	int tid, threads;
+	#pragma omp parallel private(tid) 
+	{
+		tid = omp_get_thread_num();
+		cout<<"Hello world from thread "<< tid <<"\n";
+		#pragma omp barrier //master waits until all threads finish before printing
+		if (tid == 0) {
+			threads = omp_get_num_threads();
+			cout<<"There are "<<threads<<" threads"<<endl;
+		}
+	}
+	return 0;
+}*/
+
+//AVAILABLE RUNTIME FUNCTIONS:
+//omp_get_num_threads
+//omp_get_num_procs
+//omp_set_num_threads
+//omp_get_max_threads
+
+
+//PARALLELIZING LOOPS syntax: #pragma omp for
+//for distributes the loop among the threads
+
+//PROGRAM FOR SUM OF TWO ARRAYS
+/*#include<iostream>
+using namespace std;
+
+int main() {
+	int n, i;
+	cin>>n;
+	float *a = new float[n];
+	float *b = new float[n];
+	float *c = new float[n];
+	for(i = 0; i < n; i++) {
+		a[i] = i;
+		b[i] = i;
+	}
+	#pragma omp parallel shared(a,b) private(i)
+	{
+	#pragma omp for
+		for(int i = 0; i < n; i++) {
+			c[i] = a[i] + b[i];
+			cout<<c[10];
+		}
+	}
+}*/
+
+//LOOP SCHEDULING
+//type of schedules: 1. static, dynamic, guided
 
