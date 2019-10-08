@@ -82,7 +82,6 @@ int main() {
 	start = system_clock::now();
 	parallel(b, 0, n-1);
 	stop = system_clock::now();
-	
-	time = stop - start;
-	cout<<"The parallel time is: "<<time.count()<<endl;
+	duration <double> time1 = stop - start;
+	cout<<"The parallel time is: "<<time1.count()<<endl;
 }
