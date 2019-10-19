@@ -3,7 +3,6 @@ using namespace std;
 
 __global__ void vecMat(int *a, int *b, int *c, int n) {
 	int row = blockIdx.y * blockDim.y + threadIdx.y;
-	int col = blockIdx.x * blockDim.x + threadIdx.x;
 	int sum = 0;
 	for (int j = 0; j < n; j++) {
 		sum += a[row * n + j] * b[j];
