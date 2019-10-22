@@ -51,10 +51,10 @@ int main(void) {
     cudaMemcpy(dev_a, a, size, cudaMemcpyHostToDevice);
     cudaMemcpy(dev_b, b, size, cudaMemcpyHostToDevice);
 
-    //int blocks, threads;
-    //blocks = threads = (n * 1.0f/256.0f);
+    int blocks, threads;
+    blocks = threads = ceil(n * 1.0f/256.0f);
     auto start = high_resolution_clock::now();
-    addition <<<128, 128>>> (dev_a, dev_b, dev_c, n);
+    addition <<<blocks, threads>>> (dev_a, dev_b, dev_c, n);
     auto stop = high_resolution_clock::now();
     cudaMemcpy(c, dev_c, size, cudaMemcpyDeviceToHost);
     cout<<"\nFor GPU:"<<endl;
